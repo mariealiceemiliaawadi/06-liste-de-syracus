@@ -23,6 +23,9 @@ def syr_plot(lsyr):
 #######################
 
 def syracuse_l(n):
+    """
+    Retourne la suite de Syracuse de source n sous forme de liste.
+    """
     """retourne la suite de Syracuse de source n
 
     Args:
@@ -32,9 +35,16 @@ def syracuse_l(n):
         list: la suite de Syracuse de source n
     """
 
-    # votre code ici 
-    l = [ ]
+    # votre code ici
+    l = [n]
+    while n != 1: #tant que n différent de 1
+        if n % 2 == 0: #n pair
+            n = n//2 
+        else:           # n impair
+            n = 3*n+1
+        l.append(n)  # on ajoute le nouveau n à la fin de la liste
     return l
+    
 
 def temps_de_vol(l):
     """Retourne le temps de vol d'une suite de Syracuse
@@ -45,11 +55,15 @@ def temps_de_vol(l):
     Returns:
         int: le temps de vol
     """
-    
+   
+    """
+    Le temps de vol = nombre d'itérations nécessaires
+    pour atteindre 1 (longueur de la liste - 1).
+    """
     # votre code ici
 
-    n = 0
-    return n
+    temps_de_vol = len(l)-1
+    return temps_de_vol
 
 def temps_de_vol_en_altitude(l):
     """Retourne le temps de vol en altitude d'une suite de Syracuse
@@ -62,9 +76,14 @@ def temps_de_vol_en_altitude(l):
     """
 
     # votre code ici
+    i = 1
+    ref = l[0]
+    # print(i, len(l), ref)
 
-    n = 0
-    return n
+    while i < len(l) and l[i] > ref :
+        # print(i, l[i], ref)
+        i += 1
+    return i-1
 
 
 def altitude_maximale(l):
@@ -79,8 +98,7 @@ def altitude_maximale(l):
     
     # votre code ici
     
-    n = 0
-    return n
+    return max(l)
 
 
 #### Fonction principale
@@ -89,11 +107,12 @@ def altitude_maximale(l):
 def main():
 
     # vos appels à la fonction secondaire ici
-    lsyr = syracuse_l(15)
-    syr_plot(lsyr)
-    print(temps_de_vol(lsyr))
-    print(temps_de_vol_en_altitude(lsyr))
-    print(altitude_maximale(lsyr))
+
+    lsyr = syracuse_l(15) # suite de Syracuse avec n=15
+    # syr_plot(lsyr) # affichage graphique
+    # print(temps_de_vol(lsyr))  # affichage du temps de vol
+    print(temps_de_vol_en_altitude(lsyr))  # affichage du temps de vol en altitude
+    # print(altitude_maximale(lsyr))  # affichage de l'altitude maximale
 
 
 if __name__ == "__main__":
